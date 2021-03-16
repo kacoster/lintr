@@ -24,7 +24,7 @@
 #'   consisting of 6 elements:
 #'   \itemize{
 #'     \item{`filename` (`character`)}
-#'     \item{`file_lines` (`character`) the [readLines()] output for this file}
+#'     \item{`file_lines` (`character`) the [readLines()] output for this file} # TODO document encoding
 #'     \item{`content` (`character`) for .R files, the same as `file_lines`;
 #'           for .Rmd scripts, this is the extracted R source code (as text)}
 #'     \item{`full_parsed_content` (`data.frame`) as given by
@@ -36,7 +36,7 @@
 #'   }
 #'   }
 #'   \item{error}{A `Lint` object describing any parsing error.}
-#'   \item{lines}{The [readLines()] output for this file.}
+#'   \item{lines}{The [readLines()] output for this file.} # TODO document encoding
 #' @export
 #' @md
 get_source_expressions <- function(filename) {
@@ -48,7 +48,7 @@ get_source_expressions <- function(filename) {
   on.exit(reset_lang(old_lang))
 
   source_file$lines <- withCallingHandlers({
-      readLines(filename)
+      readLines(filename) # TODO respect encoding
     },
     warning = function(w) {
       if (grepl("incomplete final line found on", w$message, fixed = TRUE)) {

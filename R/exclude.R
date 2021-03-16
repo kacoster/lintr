@@ -72,7 +72,7 @@ parse_exclusions <- function(file, exclude = settings$exclude,
                              exclude_linter = settings$exclude_linter,
                              exclude_linter_sep = settings$exclude_linter_sep) {
   lines <- withCallingHandlers({
-      readLines(file)
+      readLines(file) # TODO respect encoding
     },
     warning = function(w) {
       if (grepl("incomplete final line found on", w$message, fixed = TRUE)) {

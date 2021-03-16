@@ -443,3 +443,5 @@ test_that("cache = TRUE workflow works", {
   l2 <- lint_package(pkg, cache = TRUE)
   expect_identical(l1, l2)
 })
+
+# TODO test encoding-specific behaviour
