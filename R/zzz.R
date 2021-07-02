@@ -18,21 +18,27 @@
 #' my_linters <- with_defaults(line_length_linter = line_length_linter(120))
 #'
 #' # omit the argument name if you are just using different arguments
-#' my_linters <- with_defaults(default = my_linters,
-#'                             object_name_linter("camelCase"))
+#' my_linters <- with_defaults(
+#'   default = my_linters,
+#'   object_name_linter("camelCase")
+#' )
 #'
 #' # remove assignment checks (with NULL), add absolute path checks
-#' my_linters <- with_defaults(default = my_linters,
-#'                             assignment_linter = NULL,
-#'                             absolute_path_linter())
+#' my_linters <- with_defaults(
+#'   default = my_linters,
+#'   assignment_linter = NULL,
+#'   absolute_path_linter()
+#' )
 #'
 #' # custom list of undesirable functions:
 #' #    remove sapply (using NULL)
 #' #    add cat (with a accompanying message),
 #' #    add print (unnamed, i.e. with no accompanying message)
 #' #    add return (as taken from all_undesirable_functions)
-#' my_undesirable_functions <- with_defaults(default = default_undesirable_functions,
-#'   sapply=NULL, "cat"="No cat allowed", "print", all_undesirable_functions[["return"]])
+#' my_undesirable_functions <- with_defaults(
+#'   default = default_undesirable_functions,
+#'   sapply = NULL, "cat" = "No cat allowed", "print", all_undesirable_functions[["return"]]
+#' )
 #' @export
 with_defaults <- function(..., default = default_linters) {
   vals <- list(...)
@@ -44,8 +50,8 @@ with_defaults <- function(..., default = default_linters) {
     # var[["foo"]]    => "foo"
     nms[missing] <- re_substitutes(
       re_substitutes(
-          # Very long input might have newlines which are not caught
-          #  by . in a perl regex; see #774
+        # Very long input might have newlines which are not caught
+        #  by . in a perl regex; see #774
         re_substitutes(args, rex("(", anything), "", options = "s"),
         rex(start, anything, '["'),
         ""
@@ -96,7 +102,7 @@ default_linters <- with_defaults(
   object_length_linter(),
   object_name_linter(),
   object_usage_linter(),
-  open_curly_linter(),
+  # open_curly_linter(),
   paren_brace_linter(),
   pipe_continuation_linter(),
   semicolon_terminator_linter(),
@@ -105,8 +111,8 @@ default_linters <- with_defaults(
   spaces_inside_linter(),
   spaces_left_parentheses_linter(),
   T_and_F_symbol_linter(),
-  trailing_blank_lines_linter(),
-  trailing_whitespace_linter()
+  trailing_blank_lines_linter()
+  # trailing_whitespace_linter()
 )
 
 #' Default undesirable functions and operators
@@ -203,12 +209,14 @@ settings <- NULL
     exclude = rex::rex("#", any_spaces, "nolint"),
     exclude_start = rex::rex("#", any_spaces, "nolint start"),
     exclude_end = rex::rex("#", any_spaces, "nolint end"),
-    exclude_linter = rex::rex(start, any_spaces, ":", any_spaces,
-                              capture(
-                                name = "linters",
-                                zero_or_more(one_or_more(none_of(",.")), any_spaces, ",", any_spaces),
-                                one_or_more(none_of(",."))
-                              ), "."),
+    exclude_linter = rex::rex(
+      start, any_spaces, ":", any_spaces,
+      capture(
+        name = "linters",
+        zero_or_more(one_or_more(none_of(",.")), any_spaces, ",", any_spaces),
+        one_or_more(none_of(",."))
+      ), "."
+    ),
     exclude_linter_sep = rex::rex(any_spaces, ",", any_spaces),
     exclusions = list(),
     cache_directory = "~/.R/lintr_cache",
@@ -217,8 +225,10 @@ settings <- NULL
         "0n12nn72507",
         "r6273qnnp34",
         "43qno7q42n1",
-        "n71nn28")
-      , 54 - 13),
+        "n71nn28"
+      ),
+      54 - 13
+    ),
     comment_bot = logical_env("LINTR_COMMENT_BOT") %||% TRUE,
     error_on_lint = logical_env("LINTR_ERROR_ON_LINT") %||% FALSE
   )
