@@ -102,7 +102,7 @@ default_linters <- with_defaults(
   object_length_linter(),
   object_name_linter(),
   object_usage_linter(),
-  # open_curly_linter(),
+  open_curly_linter(),
   paren_brace_linter(),
   pipe_continuation_linter(),
   semicolon_terminator_linter(),
@@ -111,8 +111,8 @@ default_linters <- with_defaults(
   spaces_inside_linter(),
   spaces_left_parentheses_linter(),
   T_and_F_symbol_linter(),
-  trailing_blank_lines_linter()
-  # trailing_whitespace_linter()
+  trailing_blank_lines_linter(),
+  trailing_whitespace_linter()
 )
 
 #' Default undesirable functions and operators

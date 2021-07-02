@@ -30,19 +30,25 @@ lint("foo.R", linters = with_defaults(line_length_linter = line_length_linter(12
 my_linters <- with_defaults(line_length_linter = line_length_linter(120))
 
 # omit the argument name if you are just using different arguments
-my_linters <- with_defaults(default = my_linters,
-                            object_name_linter("camelCase"))
+my_linters <- with_defaults(
+  default = my_linters,
+  object_name_linter("camelCase")
+)
 
 # remove assignment checks (with NULL), add absolute path checks
-my_linters <- with_defaults(default = my_linters,
-                            assignment_linter = NULL,
-                            absolute_path_linter())
+my_linters <- with_defaults(
+  default = my_linters,
+  assignment_linter = NULL,
+  absolute_path_linter()
+)
 
 # custom list of undesirable functions:
 #    remove sapply (using NULL)
 #    add cat (with a accompanying message),
 #    add print (unnamed, i.e. with no accompanying message)
 #    add return (as taken from all_undesirable_functions)
-my_undesirable_functions <- with_defaults(default = default_undesirable_functions,
-  sapply=NULL, "cat"="No cat allowed", "print", all_undesirable_functions[["return"]])
+my_undesirable_functions <- with_defaults(
+  default = default_undesirable_functions,
+  sapply = NULL, "cat" = "No cat allowed", "print", all_undesirable_functions[["return"]]
+)
 }

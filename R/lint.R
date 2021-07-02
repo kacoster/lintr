@@ -467,8 +467,8 @@ rstudio_source_markers <- function(lints) {
 
   message(
     paste0(
-      'markers' ->
-      markers
+      'markers -> ',
+      'markers'
     )
   )
 
