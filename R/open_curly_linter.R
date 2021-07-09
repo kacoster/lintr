@@ -1,7 +1,7 @@
 #' @describeIn linters  Check that opening curly braces are never on their own
 #' line and are always followed by a newline.
 #' @export
-open_curly_linter <- function(allow_single_line = FALSE) {
+open_curly_linter <- function(allow_single_line = TRUE) {
   Linter(function(source_file) {
     lapply(
       ids_with_token(source_file, "'{'"),
