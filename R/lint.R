@@ -465,12 +465,12 @@ rstudio_source_markers <- function(lints) {
     marker
   })
 
-  message(
-    paste0(
-      'markers -> ',
-      'markers'
-    )
-  )
+  # message(
+  #   paste0(
+  #     'markers -> ',
+  #     'markers'
+  #   )
+  # )
 
   # request source markers
   out <- rstudioapi::callFun(
